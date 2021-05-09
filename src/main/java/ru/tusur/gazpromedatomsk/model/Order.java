@@ -1,6 +1,7 @@
 package ru.tusur.gazpromedatomsk.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,8 +26,12 @@ public class Order {
   @JsonIgnore
   private Long orderId;
 
+  @ApiModelProperty(notes = "Идентификатор блюда.",
+      example = "234", required = true)
   private String dishId;
 
+  @ApiModelProperty(notes = "Количество блюда.",
+      example = "2", required = true)
   private int count;
 
   @JsonIgnore
