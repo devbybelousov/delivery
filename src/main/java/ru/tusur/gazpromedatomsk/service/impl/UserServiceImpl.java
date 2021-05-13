@@ -1,6 +1,10 @@
 package ru.tusur.gazpromedatomsk.service.impl;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -54,9 +58,22 @@ public class UserServiceImpl implements UserService {
   public void addOrderToUser(List<Order> orders, Long userId) {
     User user = userRepository.findById(userId)
         .orElseThrow(() -> new NotFoundException("User not found with id - " + userId));
-    user.setOrders(orderRepository.saveAll(orders));
+
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+    user.setOrders(orderRepository.saveAll(orders.stream().peek(order -> {
+      try {
+        order.setCreatedAt(sdf.parse(sdf.format(new Date())));
+      } catch (ParseException e) {
+        extracted(e);
+      }
+    }).collect(Collectors.toList())));
     log.error(user.getOrders().toString());
     userRepository.save(user);
+  }
+
+  private void extracted(ParseException e) {
+    e.printStackTrace();
   }
 
   @Override

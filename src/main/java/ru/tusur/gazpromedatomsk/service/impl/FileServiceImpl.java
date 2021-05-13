@@ -2,6 +2,7 @@ package ru.tusur.gazpromedatomsk.service.impl;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -174,6 +175,7 @@ public class FileServiceImpl implements FileService {
 
     for (int i = 0; i < users.size(); i++) {
       int value = getCountDish(users.get(i).getOrders(), item.getId());
+      log.error(String.valueOf(value));
       row.createCell(i + 2).setCellValue(value);
 
       sum += value;
@@ -188,20 +190,26 @@ public class FileServiceImpl implements FileService {
     row.createCell(users.size() + 2).setCellValue(sum);
 
     if (rowNum % 2 == 0) {
-      row.getCell(users.size() + 2).setCellStyle(getStyleBorder(workbook, 1));
+      row.getCell(users.size() + 2).setCellStyle(getStyleBorder(workbook, -1));
     } else {
-      row.getCell(users.size() + 2).setCellStyle(getStyleGreen(workbook, 1));
+      row.getCell(users.size() + 2).setCellStyle(getStyleGreen(workbook, -1));
     }
   }
 
 
   private int getCountDish(List<Order> orders, String dishId) {
     int count = 0;
-    Date today = new Date();
+
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
     for (Order order : orders) {
-      if (order.getDishId().equals(dishId) && order.getCreatedAt().equals(today)) {
-        count = order.getCount();
+      try {
+        if (order.getDishId().equals(dishId) && order.getCreatedAt()
+            .equals(sdf.parse(sdf.format(new Date())))) {
+          count = order.getCount();
+        }
+      } catch (ParseException e) {
+        e.printStackTrace();
       }
     }
     return count;

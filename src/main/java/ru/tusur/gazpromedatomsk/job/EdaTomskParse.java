@@ -46,12 +46,16 @@ public class EdaTomskParse {
       Elements labels = menu.select("div.menulist__content__label");
       Elements blocksMenu = menu.select("div.menulist__content__list");
 
+      boolean isCreate = true;
+
       for (int i = 0; i < labels.size(); i++) {
         Elements itemsMenu = blocksMenu.get(i).select("div.menulistItem");
         for (Element item : itemsMenu) {
           if (dishService.existDish(item.id())) {
             dishes.add(dishService.getDish(item.id()));
           } else {
+
+            isCreate = false;
 
             String image = url + item.select("div.menulistItem__image").attr("style")
                 .replace("background: url(/", "")
@@ -111,10 +115,12 @@ public class EdaTomskParse {
 
       SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
-      Menu menuToday = new Menu();
-      menuToday.setDishes(dishes);
-      menuToday.setCreatedAt(sdf.parse(sdf.format(new Date())));
-      menuService.save(menuToday);
+      if (!isCreate) {
+        Menu menuToday = new Menu();
+        menuToday.setDishes(dishes);
+        menuToday.setCreatedAt(sdf.parse(sdf.format(new Date())));
+        menuService.save(menuToday);
+      }
 
     } catch (IOException | ParseException e) {
       e.printStackTrace();
