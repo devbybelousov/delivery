@@ -23,7 +23,10 @@ public class FoodValue {
   private Long id;
 
   private String protein;
+
   private String fats;
+
   private String carb;
+
   private String energyValue;
 }

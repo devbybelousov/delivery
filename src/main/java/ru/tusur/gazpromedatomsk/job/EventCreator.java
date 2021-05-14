@@ -13,13 +13,13 @@ import ru.tusur.gazpromedatomsk.service.UserService;
 @AllArgsConstructor
 public class EventCreator {
 
-  private final EdaTomskParse edaTomskParse;
+  private final MenuParse menuParse;
   private final UserService userService;
   private final FileService fileService;
 
   @Scheduled(cron = "0 0 6 * * ?", zone = "GMT+7:00")
   public void createMenu() {
-    edaTomskParse.parseEda();
+    menuParse.parse();
     log.debug("Parse Success!");
   }
 

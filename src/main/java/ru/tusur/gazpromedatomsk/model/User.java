@@ -1,5 +1,6 @@
 package ru.tusur.gazpromedatomsk.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,11 +25,15 @@ public class User {
   private Long userId;
 
   private String name;
+
   private String lastName;
+
   private String email;
+
   private Boolean isAdmin;
 
   @OneToMany
+  @JsonIgnore
   @JoinColumn(name = "userId", referencedColumnName = "userId")
   private List<Order> orders;
 }

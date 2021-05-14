@@ -9,9 +9,11 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import ru.tusur.gazpromedatomsk.job.MenuParse;
 import ru.tusur.gazpromedatomsk.model.Menu;
 import ru.tusur.gazpromedatomsk.service.MenuService;
 
@@ -23,6 +25,7 @@ import ru.tusur.gazpromedatomsk.service.MenuService;
 public class MenuController {
 
   private final MenuService menuService;
+  private final MenuParse menuParse;
 
   @ApiOperation(value = "Получить меню на сегодня")
   @ApiResponses(value = {
@@ -32,5 +35,15 @@ public class MenuController {
   @ResponseStatus(HttpStatus.OK)
   public Menu getAllMenu() {
     return menuService.getAllToday();
+  }
+
+  @ApiOperation(value = "Получить меню с сайта и внести в базу")
+  @ApiResponses(value = {
+      @ApiResponse(code = 200, message = "Ok", response = List.class)
+  })
+  @PostMapping
+  @ResponseStatus(HttpStatus.OK)
+  public void setMenu(){
+    menuParse.parse();
   }
 }

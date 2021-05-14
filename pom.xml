@@ -13,7 +13,7 @@
 	<properties>
 		<downloadSources>true</downloadSources>
 		<downloadJavadocs>true</downloadJavadocs>
-		<final_name>gazprom</final_name>
+		<final.name>gazprom</final.name>
 		<java.version>1.8</java.version>
 		<swagger.version>2.9.2</swagger.version>
 	</properties>
@@ -22,7 +22,7 @@
 	<groupId>ru.tusur</groupId>
 	<artifactId>gazprom-edatomsk</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>gazprom-edatomsk</name>
+	<name>gazprom</name>
 
 
 	<dependencies>

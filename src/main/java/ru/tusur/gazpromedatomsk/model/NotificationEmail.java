@@ -10,8 +10,11 @@ import lombok.NoArgsConstructor;
 public class NotificationEmail {
 
   private String subject;
+
   private String recipient;
+
   private String body;
+
   private String fileName;
 
   public NotificationEmail(String subject, String recipient, String body) {

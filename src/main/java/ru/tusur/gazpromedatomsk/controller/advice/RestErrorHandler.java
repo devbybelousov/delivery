@@ -15,6 +15,6 @@ public class RestErrorHandler {
   @ResponseStatus(HttpStatus.NOT_FOUND)
   public void handleNotFoundException(NotFoundException ex) {
     log.debug("handling 404 error");
-    log.debug(ex.getMessage());
+    log.debug(ex.getLocalizedMessage());
   }
 }

@@ -31,4 +31,8 @@ public class UserRequest {
   @ApiModelProperty(notes = "Почта пользователя.",
       example = "ivanov@example.com", required = true)
   private String email;
+
+  @ApiModelProperty(notes = "Является ли данный пользователь администратором.",
+      example = "true", required = true)
+  private Boolean isAdmin;
 }

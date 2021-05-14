@@ -3,11 +3,14 @@ package ru.tusur.gazpromedatomsk.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import lombok.AllArgsConstructor;
@@ -25,7 +28,14 @@ public class Menu {
   @JsonIgnore
   private Long menuId;
 
-  @OneToMany
+  @ManyToMany(cascade = {
+      CascadeType.PERSIST,
+      CascadeType.MERGE
+  })
+  @JoinTable(name = "menu_dish",
+      joinColumns = @JoinColumn(name = "menuId"),
+      inverseJoinColumns = @JoinColumn(name = "dishId")
+  )
   private List<Dish> dishes;
 
   @JsonIgnore

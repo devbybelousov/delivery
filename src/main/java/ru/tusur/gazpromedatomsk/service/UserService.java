@@ -13,5 +13,7 @@ public interface UserService {
 
   void addOrderToUser(List<Order> orders, Long userId);
 
-  List<User> getAllUser();
+  List<User> getAllUser(Boolean isAdmin);
+
+  User getUser(Long id);
 }

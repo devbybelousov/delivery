@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService {
         user -> {
           mailService.sendMail(new NotificationEmail("Время кушать!",
               user.getEmail(),
-              "Чтобы посмотреть меню нажмите на <a href=\"http://localhost:8080/api/menu\">ссылку</a></br>"
+              "Чтобы посмотреть меню нажмите на <a href=\"http://localhost:3000/user/" + user.getUserId() + "\">ссылку</a></br>"
                   + "Это автоматическая рассылка, отвечать на нее не нужно."
           ));
           return user;
@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService {
         .email(userRequest.getEmail())
         .name(userRequest.getName())
         .lastName(userRequest.getLastName())
-        .isAdmin(false)
+        .isAdmin(userRequest.getIsAdmin())
         .build();
     userRepository.save(user);
   }
@@ -77,8 +77,13 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public List<User> getAllUser() {
-    return userRepository.findAllByIsAdmin(false);
+  public List<User> getAllUser(Boolean isAdmin) {
+    return userRepository.findAllByIsAdmin(isAdmin);
+  }
+
+  @Override
+  public User getUser(Long id) {
+    return userRepository.findById(id).orElseThrow(() -> new NotFoundException("User not found with id - " + id));
   }
 
 }

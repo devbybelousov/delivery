@@ -23,14 +23,14 @@ import ru.tusur.gazpromedatomsk.service.MenuService;
 @Component
 @AllArgsConstructor
 @Slf4j
-public class EdaTomskParse {
+public class MenuParse {
 
   private final DishService dishService;
   private final MenuService menuService;
 
   private final int SIZE_CONTENT = 150;
 
-  public void parseEda() {
+  public void parse() {
     String url = "https://edatomsk.ru/";
 
     List<Dish> dishes = new ArrayList<>();
@@ -115,12 +115,10 @@ public class EdaTomskParse {
 
       SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
-      if (!isCreate) {
-        Menu menuToday = new Menu();
-        menuToday.setDishes(dishes);
-        menuToday.setCreatedAt(sdf.parse(sdf.format(new Date())));
-        menuService.save(menuToday);
-      }
+      Menu menuToday = menuService.getMenuIfNotExistGetNewMenu();
+      menuToday.setDishes(dishes);
+      menuToday.setCreatedAt(sdf.parse(sdf.format(new Date())));
+      menuService.save(menuToday);
 
     } catch (IOException | ParseException e) {
       e.printStackTrace();

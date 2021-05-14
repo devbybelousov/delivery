@@ -19,10 +19,15 @@ public class Dish {
 
   @Id
   private String id;
+
   private String type;
+
   private String title;
+
   private String weight;
+
   private int price;
+
   private String image;
 
   @OneToOne

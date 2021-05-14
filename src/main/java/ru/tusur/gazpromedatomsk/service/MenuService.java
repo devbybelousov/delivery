@@ -6,5 +6,7 @@ public interface MenuService {
 
   Menu getAllToday();
 
+  Menu getMenuIfNotExistGetNewMenu();
+
   void save(Menu menu);
 }

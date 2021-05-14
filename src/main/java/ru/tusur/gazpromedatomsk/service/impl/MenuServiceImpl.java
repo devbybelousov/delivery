@@ -1,6 +1,5 @@
 package ru.tusur.gazpromedatomsk.service.impl;
 
-import io.swagger.annotations.Api;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -30,6 +29,20 @@ public class MenuServiceImpl implements MenuService {
       e.printStackTrace();
     }
     return new Menu();
+  }
+
+  @Override
+  public Menu getMenuIfNotExistGetNewMenu() {
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    Date today = null;
+    try {
+      today = sdf.parse(sdf.format(new Date()));
+    } catch (ParseException e) {
+      e.printStackTrace();
+    }
+
+    return menuRepository.findByCreatedAt(today)
+        .orElse(new Menu());
   }
 
   @Override
