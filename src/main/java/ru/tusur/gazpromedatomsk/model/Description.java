@@ -18,7 +18,7 @@ public class Description {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @JsonIgnore
-  private Long id;
+  private Long descriptionId;
 
   @Size(max = 200)
   private String content;

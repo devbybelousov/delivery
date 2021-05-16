@@ -196,14 +196,14 @@ public class FileServiceImpl implements FileService {
     String cellDish;
     if (!item.getDescription().get(0).getContent().equals("")) {
       cellDish = String.format("{%s} %s (%s), %s",
-          item.getId(),
+          item.getDishId(),
           item.getTitle(),
           item.getDescription().stream().map(Description::getContent)
               .collect(Collectors.joining()),
           item.getWeight());
     } else {
       cellDish = String.format("{%s} %s, %s",
-          item.getId(),
+          item.getDishId(),
           item.getTitle(),
           item.getWeight());
     }
@@ -232,7 +232,7 @@ public class FileServiceImpl implements FileService {
     for (int i = 0; i < users.size(); i++) {
       Date finalToday = today;
       int value = users.get(i).getOrders().stream()
-          .filter(order -> item.getId().equals(order.getDishId()))
+          .filter(order -> item.getDishId().equals(order.getDishId()))
           .filter(order -> finalToday.equals(order.getCreatedAt()))
           .mapToInt(Order::getCount)
           .sum();

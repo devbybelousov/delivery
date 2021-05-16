@@ -92,7 +92,7 @@ public class MenuParse {
 
             Dish dish = new Dish();
             dish.setType(labels.get(i).text());
-            dish.setId(item.id());
+            dish.setDishId(item.id());
             dish.setPrice(Integer.parseInt(price));
             dish.setTitle(name);
             dish.setWeight(weight);

@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 public class Dish {
 
   @Id
-  private String id;
+  private String dishId;
 
   private String type;
 

@@ -20,7 +20,7 @@ public class FoodValue {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @JsonIgnore
-  private Long id;
+  private Long foodValueId;
 
   private String protein;
 
