@@ -3,6 +3,7 @@ package ru.tusur.gazpromedatomsk.model;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -33,8 +34,10 @@ public class Dish {
   private String image;
 
   @OneToOne
+  @JoinColumn(name = "foodValueId", referencedColumnName = "foodValueId")
   private FoodValue foodValue;
 
   @OneToMany
+  @JoinColumn(name = "dishId", referencedColumnName = "dishId")
   private List<Description> description;
 }
