@@ -29,7 +29,8 @@ public class MenuController {
 
   @ApiOperation(value = "Получить меню на сегодня")
   @ApiResponses(value = {
-      @ApiResponse(code = 200, message = "Ok", response = List.class)
+      @ApiResponse(code = 200, message = "Ok", response = List.class),
+      @ApiResponse(code = 404, message = "Меню на сегодня не найдено")
   })
   @GetMapping
   @ResponseStatus(HttpStatus.OK)
