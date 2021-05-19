@@ -115,6 +115,8 @@ public class MenuParse {
 
       SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
+      log.warn("Day menu: " + sdf.parse(sdf.format(new Date())).toString());
+
       Menu menuToday = menuService.getMenuIfNotExistGetNewMenu();
       menuToday.setDishes(dishes);
       menuToday.setCreatedAt(sdf.parse(sdf.format(new Date())));

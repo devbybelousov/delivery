@@ -41,6 +41,8 @@ public class MenuServiceImpl implements MenuService {
       e.printStackTrace();
     }
 
+    log.warn("Today: " + today);
+
     return menuRepository.findByCreatedAt(today)
         .orElse(new Menu());
   }
