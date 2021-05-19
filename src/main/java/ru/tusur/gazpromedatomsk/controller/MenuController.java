@@ -4,6 +4,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import java.util.Date;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -35,6 +36,7 @@ public class MenuController {
   @GetMapping
   @ResponseStatus(HttpStatus.OK)
   public Menu getAllMenu() {
+    log.warn("Today: " + new Date().toString());
     return menuService.getAllToday();
   }
 
