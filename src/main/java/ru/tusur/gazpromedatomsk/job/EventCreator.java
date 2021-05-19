@@ -17,20 +17,20 @@ public class EventCreator {
   private final UserService userService;
   private final FileService fileService;
 
-  @Scheduled(cron = "0 46 22 * * ?", zone = "GMT+7:00")
+  @Scheduled(cron = "0 0 6 * * ?", zone = "GMT+7:00")
   public void createMenu() {
     menuParse.parse();
     log.debug("Parse Success!");
   }
 
-  @Scheduled(cron = "0 0 */9 * * ?", zone = "GMT+7:00")
-  public void sendAllEmailForAddMenu() {
-    userService.sendEmailToAllUser();
-    log.debug("Send Email Success!");
+  @Scheduled(cron = "0 0 12 * * ?", zone = "GMT+7:00")
+  public void sendOrder() {
+    fileService.sendEmailToDelivery();
+    fileService.sendEmailToAdmin();
   }
 
-  @Scheduled(cron = "0 0 */12 * * ?", zone = "GMT+7:00")
-  public void sendOrder() {
+  @Scheduled(cron = "0 0 5 * * ?", zone = "GMT+7:00")
+  public void deleteAll() {
     fileService.sendEmailToDelivery();
     fileService.sendEmailToAdmin();
   }
