@@ -18,7 +18,7 @@ public class EventCreator {
   private final FileService fileService;
 
   @Scheduled(cron = "0 0 6 * * ?", zone = "GMT+7:00")
-  @Scheduled(cron = "0 16 16 * * ?", zone = "GMT+7:00")
+  @Scheduled(cron = "0 25 17 * * ?", zone = "GMT+7:00")
   public void createMenu() {
     menuParse.parse();
     log.debug("Parse Success!");

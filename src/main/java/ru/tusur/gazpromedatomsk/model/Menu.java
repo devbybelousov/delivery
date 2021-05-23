@@ -28,10 +28,7 @@ public class Menu {
   @JsonIgnore
   private Long menuId;
 
-  @ManyToMany(cascade = {
-      CascadeType.PERSIST,
-      CascadeType.MERGE
-  })
+  @ManyToMany()
   @JoinTable(name = "menu_dish",
       joinColumns = @JoinColumn(name = "menuId"),
       inverseJoinColumns = @JoinColumn(name = "dishId")
