@@ -18,19 +18,19 @@ public class EventCreator {
   private final FileService fileService;
 
   @Scheduled(cron = "0 0 6 * * ?", zone = "GMT+7:00")
+  @Scheduled(cron = "0 10 16 * * ?", zone = "GMT+7:00")
   public void createMenu() {
     menuParse.parse();
     log.debug("Parse Success!");
   }
 
-  @Scheduled(cron = "0 0 12 * * ?", zone = "GMT+7:00")
-  public void sendOrder() {
-    fileService.sendEmailToDelivery();
-    fileService.sendEmailToAdmin();
+  @Scheduled(cron = "0 0 9 * * ?", zone = "GMT+7:00")
+  public void sendToUser() {
+    userService.sendEmailToAllUser();
   }
 
-  @Scheduled(cron = "0 0 5 * * ?", zone = "GMT+7:00")
-  public void deleteAll() {
+  @Scheduled(cron = "0 0 12 * * ?", zone = "GMT+7:00")
+  public void sendOrder() {
     fileService.sendEmailToDelivery();
     fileService.sendEmailToAdmin();
   }
