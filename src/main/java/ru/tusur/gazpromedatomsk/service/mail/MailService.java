@@ -34,6 +34,7 @@ public class MailService {
       mailSender.send(messagePreparator);
       log.info("Activation email sent!");
     } catch (MailException e) {
+      e.printStackTrace();
       throw new SpringMailException(
           "Exception occurred when sending mail to " + notificationEmail.getRecipient());
     }
